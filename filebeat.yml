@@ -1,0 +1,55 @@
+# Disable strict file permission checks for Podman volume mounts
+strict.perms: false
+
+# ============================== Inputs =====================================
+filebeat.inputs:
+  - type: filestream
+    id: application-logs-auth
+    enabled: true
+
+    # Matches the internal container mount path (/var/log/app)
+    paths:
+      - /var/log/app/*.log
+      - /var/log/app/*/*.log
+
+    exclude_files: ['\.gz$', '\.zip$']
+
+    # ------------------ Multiline Handling (Stack Traces) ------------------
+    parsers:
+      - multiline:
+          type: pattern
+          pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}'
+          negate: true
+          match: after
+
+    # ------------------ In-line Filtering ------------------
+    exclude_lines: ['GET /healthz', 'GET /metrics']
+
+# ============================= Processors ===================================
+processors:
+  - add_host_metadata:
+      netinfo: false
+
+  - add_fields:
+      target: ''
+      fields:
+        environment: production
+        service.name: auth-service
+
+  - decode_json_fields:
+      fields: ["message"]
+      target: "app"
+      overwrite_keys: true
+      add_error_key: true
+
+# =============================== Queue ======================================
+# Memory queue tuned for immediate flushes during container testing
+queue.mem:
+  events: 64
+  flush.min_events: 1
+
+# ============================== Output =====================================
+output.kafka:
+  hosts: ["kafka:9092"]
+  topic: 'logs-app'
+  compression: gzip
