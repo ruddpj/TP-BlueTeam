@@ -6,8 +6,7 @@ networks:
 
 services:
   kafka:
-    image: apache/kafka:latest
-    container_name: kafka
+    image: docker.io/apache/kafka:latest
     ports:
       - "9092:9092"
     environment:
@@ -28,7 +27,6 @@ services:
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:8.11.0
-    container_name: filebeat
     user: root
     entrypoint: ["filebeat", "-e", "-strict.perms=false"]
     volumes:
@@ -41,7 +39,6 @@ services:
 
   logstash:
     image: docker.elastic.co/logstash/logstash:8.11.0
-    container_name: logstash
     volumes:
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro,z
     depends_on:
