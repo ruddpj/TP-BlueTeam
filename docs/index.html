@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tímový projekt 2026/27 – Agentický systém pre predikciu útoku</title>
+<meta name="description" content="Agentický systém pre predikciu útoku a reakciu v reálnom čase. Tímový projekt STU FEI v spolupráci s Alison Slovakia s.r.o.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="page">
+
+<header class="site-header">
+  <span class="brand">Tímový projekt 2026/27</span>
+  <nav>
+    <a href="#projekt">Projekt</a>
+    <a href="#ulohy">Úlohy</a>
+    <a href="#zapisnice">Zápisnice</a>
+    <a href="#tim">Tím</a>
+    <a href="#dokumentacia" class="nav-cta">Dokumentácia</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <h1>Agentický systém pre predikciu útoku a reakciu v reálnom čase</h1>
+  <p>Cieľom je navrhnúť a implementovať agentický systém, ktorý dokáže z bezpečnostných udalostí zostaviť obraz prebiehajúceho incidentu, odhadnúť možné ďalšie kroky útočníka a navrhnúť vhodnú reakciu ešte predtým, než dôjde k ďalšej kompromitácii.</p>
+  <span class="partner">V spolupráci s Alison Slovakia s.r.o.</span>
+  <div class="actions">
+    <a href="#zapisnice" class="btn btn-primary">Zápisnica</a>
+    <a href="#projekt" class="btn btn-secondary">O projekte</a>
+  </div>
+</section>
+
+<section id="projekt" class="section">
+  <h2>O projekte</h2>
+  <div class="section-body prose">
+    <p>Moderné bezpečnostné incidenty často vznikajú ako séria navzájom súvisiacich krokov od počiatočnej kompromitácie cez eskaláciu oprávnení a laterálny pohyb až po prístup ku kritickým aktívam. Projekt sa zameria na vytvorenie AI agenta, ktorý nebude iba pasívne analyzovať bezpečnostné udalosti, ale bude priebežne vytvárať hypotézy o priebehu útoku, odhadovať jeho ďalší vývoj a navrhovať možné reakčné opatrenia.</p>
+    <p>Projekt môže byť zameraný na vybraný typ bezpečnostných incidentov podľa zvolenej oblasti. Agent bude z dostupných informácií vytvárať a priebežne aktualizovať stav incidentu a vyhodnocovať možné pokračovanie útoku.</p>
+    <p>Súčasťou riešenia bude aj porovnávanie alternatívnych reakčných opatrení zodpovedajúcich zvolenému typu incidentu.</p>
+    <p>Výsledkom bude prototyp AI asistenta pre incident response overený na pripravených scenároch.</p>
+  </div>
+</section>
+
+<section id="ulohy" class="section">
+  <h2>Úlohy</h2>
+  <ol class="section-body tasks">
+    <li class="task active"><span class="task-num">1.</span><span class="task-text">Navrhnúť reprezentáciu stavu bezpečnostného incidentu pre zvolenú oblasť: identity a oprávnenia, endpointy, sieťové aktíva, cloudové služby, aplikácie, kombináciu viacerých oblastí.</span><span class="task-status">Prebieha</span></li>
+    <li class="task"><span class="task-num">2.</span><span class="task-text">Implementovať spracovanie a koreláciu relevantných bezpečnostných udalostí a priebežné vytváranie kontextu aktuálneho incidentu.</span><span></span></li>
+    <li class="task"><span class="task-num">3.</span><span class="task-text">Implementovať agenta schopného vytvárať hypotézy o priebehu útoku, predikovať možné ďalšie kroky útočníka a navrhovať vhodnú reakciu.</span><span></span></li>
+    <li class="task"><span class="task-num">4.</span><span class="task-text">Implementovať mechanizmus porovnávania alebo simulácie viacerých reakčných opatrení a vyhodnocovania ich možného dopadu na ďalší priebeh incidentu.</span><span></span></li>
+    <li class="task"><span class="task-num">5.</span><span class="task-text">Otestovať systém na pripravených incidentných scenároch a vyhodnotiť presnosť analýzy a predikcie, kvalitu navrhovaných opatrení, čas rozhodovania a mieru potrebného zásahu bezpečnostného analytika.</span><span></span></li>
+  </ol>
+</section>
+
+<section id="zapisnice" class="section">
+  <h2>Zápisnica</h2>
+  <div class="section-body">
+    <!-- Obsah zápisníc je v zapisnice/tyzden-XX.json. Nový týždeň = skopíruj blok <details> a vyplň ho podľa JSON. -->
+
+    <!-- Týždeň 1 (zapisnice/tyzden-01.json) -->
+    <details class="minutes" id="tyzden-1" open>
+      <summary>
+        <span class="m-date">7. 10. 2026</span>
+        <span class="m-title">Úvodné stretnutie, organizácia projektu</span>
+        <span class="m-toggle" aria-hidden="true">↓</span>
+      </summary>
+      <div class="m-content">
+        <dl class="m-meta">
+          <div><dt>Stretnutie</dt><dd>7. 10. 2026</dd></div>
+          <div><dt>Zápis vypracoval</dt><dd>Adam Hoffmann</dd></div>
+          <div><dt>Prítomní</dt><dd>Všetci členovia tímu</dd></div>
+        </dl>
+        <div class="m-block">
+          <span class="m-label">Priebeh stretnutia</span>
+          <p>Na stretnutí boli prezentované úvodné informácie k projektu a organizačné záležitosti.</p>
+        </div>
+        <div class="m-block">
+          <span class="m-label">Zadané úlohy</span>
+          <ul class="m-tasks">
+            <li><span class="what">Pripraviť web stránku projektu</span><span class="who">Adam Hoffmann</span></li>
+            <li><span class="what">Založenie spoločného repozitára</span><span class="who">Rudolf Tisoň</span></li>
+            <li><span class="what">Rešerš tematiky projektu</span><span class="who">Všetci</span></li>
+            <li><span class="what">Vygenerovať SSH kľúč a poslať vedúcemu projektu</span><span class="who">Všetci</span></li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section id="tim" class="section">
+  <h2>Tím</h2>
+  <div class="section-body team">
+    <div class="team-group">
+      <span class="team-label">Vedúci projektu</span>
+      <div class="lead">
+        <span class="lead-name">Ing. Lukáš Šurab</span>
+        <span class="lead-org">STU FEI • Alison Slovakia s.r.o.</span>
+      </div>
+    </div>
+    <div class="team-group">
+      <span class="team-label">Členovia tímu</span>
+      <ul class="members">
+        <li>Damián Danko</li>
+        <li>Marco Dzurilla</li>
+        <li>Adam Hoffmann</li>
+        <li>Boris Pekarčik</li>
+        <li>Rudolf Tisoň</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="dokumentacia" class="docs-card">
+  <div>
+    <h2>Dokumentácia</h2>
+    <p>Oficiálne zadanie, ponuka, ciele riešenia, analýza problému, algoritmy a metódy, dokumentácia k programom, výsledky a použitá literatúra.</p>
+  </div>
+  <a href="#" class="btn btn-primary">Otvoriť PDF</a>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="logos">
+    <img src="assets/stufeilogo.jpg" alt="STU FEI" class="logo-stu">
+    <img src="assets/alison-logo.svg" alt="Alison Slovakia" class="logo-alison">
+  </div>
+  <span>STU FEI · 2026/27</span>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "tyzden": 1,
+  "datum": "7. 10. 2026",
+  "nazov": "Úvodné stretnutie, organizácia projektu",
+  "zapis_vypracoval": "Adam Hoffmann",
+  "pritomni": "Všetci členovia tímu",
+  "priebeh_stretnutia": "Na stretnutí boli prezentované úvodné informácie k projektu a organizačné záležitosti.",
+  "zadane_ulohy": [
+    {
+      "uloha": "Pripraviť web stránku projektu",
+      "zodpovedny": "Adam Hoffmann"
+    },
+    {
+      "uloha": "Založenie spoločného repozitára",
+      "zodpovedny": "Rudolf Tisoň"
+    },
+    {
+      "uloha": "Rešerš tematiky projektu",
+      "zodpovedny": "Všetci"
+    },
+    {
+      "uloha": "Vygenerovať SSH kľúč a poslať vedúcemu projektu",
+      "zodpovedny": "Všetci"
+    }
+  ]
+}
