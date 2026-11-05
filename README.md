@@ -38,6 +38,24 @@ Systém je rozdelený na dátovú pipeline pre zber a spracovanie telemetry a ag
    [ Agentic Core ]   (LangGraph + Qwen / DeepSeek)
 ```
 
+### Spustenie ingest pipeline
+
+Elasticsearch je dostupný iba lokálne na `127.0.0.1:9200` a v tomto testovacom nastavení
+nemá zapnuté prihlasovanie. Spustite služby príkazom:
+
+```sh
+podman-compose -f podman-compose.yml up -d
+```
+
+Logstash zapisuje spracované udalosti do dátového streamu `logs-app-default`.
+Jeho stav môžete overiť príkazom:
+
+```sh
+curl http://127.0.0.1:9200/_data_stream/logs-app-default
+```
+
+Údaje Elasticsearch sa zachovajú v pomenovanom volume `elasticsearch-data`.
+
 ---
 
 ## 🛠️ Použité technológie
