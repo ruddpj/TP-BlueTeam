@@ -80,7 +80,39 @@ class RiskScorerTest
       "threat indicator IPs"
     )
     assert_equal ["provider-a"], event.get("[threat][indicator][provider]"), "threat providers"
+    assert_equal "ipv4-addr", event.get("[threat][indicator][type]"), "threat indicator type"
     assert_equal "high", event.get("[soc][risk][status]"), "high risk status"
+  end
+
+  def test_detects_url_encoded_payload_patterns
+    scorer = build_scorer
+
+    [
+      "query=union%20select",
+      "query=union+select",
+      "path=..%2f..%2f..%2fetc/passwd"
+    ].each do |url_path|
+      event = FakeEvent.new("url" => { "path" => url_path })
+      scorer.send(:filter, event)
+
+      assert_equal 30, event.get("[event][risk_score]"), "encoded payload risk score for #{url_path}"
+      assert_equal(
+        ["suspicious_payload_pattern"],
+        event.get("[soc][risk][reasons]"),
+        "encoded payload reason for #{url_path}"
+      )
+    end
+  end
+
+  def test_uses_threshold_from_script_params
+    scorer = build_scorer("25")
+    event = FakeEvent.new(
+      "event" => { "category" => ["authentication"], "outcome" => "failure" }
+    )
+
+    scorer.send(:filter, event)
+
+    assert_equal "high", event.get("[soc][risk][status]"), "status at configured threshold"
   end
 
   def test_marks_unmatched_events_as_low
@@ -95,24 +127,21 @@ class RiskScorerTest
   end
 
   def test_rejects_out_of_range_threshold
-    previous_value = ENV["RISK_SCORE_THRESHOLD"]
-    ENV["RISK_SCORE_THRESHOLD"] = "101"
-
     begin
-      Object.new.send(:register, {})
+      Object.new.send(:register, { "threshold" => "101" })
     rescue ArgumentError
       return
     end
 
     raise "out-of-range risk score threshold was accepted"
-  ensure
-    ENV["RISK_SCORE_THRESHOLD"] = previous_value
   end
 
   def run
     tests = %i[
       test_scores_windows_process_chain_and_caps_score
       test_records_threat_indicators_in_ecs_fields
+      test_detects_url_encoded_payload_patterns
+      test_uses_threshold_from_script_params
       test_marks_unmatched_events_as_low
       test_rejects_out_of_range_threshold
     ]
@@ -122,9 +151,9 @@ class RiskScorerTest
 
   private
 
-  def build_scorer
+  def build_scorer(threshold = "50")
     scorer = Object.new
-    scorer.send(:register, {})
+    scorer.send(:register, { "threshold" => threshold })
     scorer
   end
 end

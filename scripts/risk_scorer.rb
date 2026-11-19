@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-def register(_params)
-  @risk_score_threshold = Integer(ENV.fetch("RISK_SCORE_THRESHOLD", "50"))
+def register(params)
+  @risk_score_threshold = Integer(params.fetch("threshold", "50"))
   unless (1..100).cover?(@risk_score_threshold)
     raise ArgumentError, "RISK_SCORE_THRESHOLD must be between 1 and 100"
   end
@@ -20,10 +20,10 @@ def register(_params)
     "[client][ip]" => "[@metadata][threat_intel][client_ip]"
   }.freeze
   @suspicious_payload_pattern =
-    /(?:union\s+select|<\s*script|(?:\.\.\/){3,}|-enc\s+[a-z0-9+\/=]{20,})/i.freeze
+    /(?:union(?:\s|%20|\+)+select|<\s*script|(?:\.\.(?:\/|%2f)){3,}|-enc(?:\s|%20|\+)+[a-z0-9+\/=%]{20,})/i
   @normalize_proc = lambda do |value|
     value.to_s.tr("\\", "/").split("/").last.to_s.downcase.sub(/\.exe\z/, "")
-  end.freeze
+  end
 end
 
 def filter(event)
@@ -48,6 +48,7 @@ def filter(event)
     reasons << "threat_intel_match"
     event.set("[threat][indicator][ip]", threat_ips.compact.uniq)
     event.set("[threat][indicator][provider]", threat_providers.uniq)
+    event.set("[threat][indicator][type]", "ipv4-addr")
   end
 
   if (categories.include?("authentication") && outcome == "failure") || event_code == "4625"
@@ -71,7 +72,7 @@ def filter(event)
   score = [score, 100].min
   event.set("[event][risk_score]", score)
   event.set("[soc][risk][reasons]", reasons)
-  status = score >= @risk_score_threshold ? "high" : (score > 0 ? "elevated" : "low")
+  status = score >= @risk_score_threshold ? "high" : (score > 0 ? "medium" : "low")
   event.set("[soc][risk][status]", status)
   event.tag("risk_assessed")
   [event]
