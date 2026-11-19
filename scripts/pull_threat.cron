@@ -1,0 +1,1 @@
+0 * * * * THREAT_INTEL_OUTPUT_PATH=/data/threat-intel.yml /usr/local/bin/python /usr/local/bin/pull_threat.py >> /proc/1/fd/1 2>&1

@@ -8,6 +8,24 @@ volumes:
   elasticsearch-data:
 
 services:
+  threat-intel-updater:
+    image: python:3.12-alpine
+    command:
+      - /bin/sh
+      - -c
+      - |
+        THREAT_INTEL_OUTPUT_PATH=/data/threat-intel.yml \
+          /usr/local/bin/python /usr/local/bin/pull_threat.py ||
+          echo "Initial threat-intel update failed; scheduled retries remain active."
+        exec crond -f -d 2 -c /etc/crontabs
+    volumes:
+      - ./scripts/pull_threat.py:/usr/local/bin/pull_threat.py:ro,z
+      - ./scripts/pull_threat.cron:/etc/crontabs/root:ro,z
+      - ./threat-intel:/data:rw,z
+    restart: unless-stopped
+    networks:
+      - ingestion-net
+
   kafka:
     image: docker.io/apache/kafka:latest
     ports:
@@ -55,10 +73,15 @@ services:
 
   logstash:
     image: docker.elastic.co/logstash/logstash:8.11.0
+    environment:
+      RISK_SCORE_THRESHOLD: ${RISK_SCORE_THRESHOLD:-70}
     volumes:
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro,z
+      - ./scripts/risk_scorer.rb:/usr/share/logstash/scripts/risk_scorer.rb:ro,z
+      - ./threat-intel:/usr/share/logstash/config/threat-intel:ro,z
     depends_on:
       - kafka
       - elasticsearch
+      - threat-intel-updater
     networks:
       - ingestion-net

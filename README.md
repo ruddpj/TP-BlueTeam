@@ -17,26 +17,7 @@ Namiesto pasívneho reportovania udalostí agent generuje hypotézy o prebiehaj�
 
 ## 🏗️ Architektúra a Tok dát
 
-Systém je rozdelený na dátovú pipeline pre zber a spracovanie telemetry a agentickú vrstvu pre autonómnu analýzu.
-
-```
-[ Zdroje / Telemetria ]
-        │
-        ▼
-    Filebeat          (Zber a odosielanie logov z koncových uzlov)
-        │
-        ▼
-  Apache Kafka        (Message broker pre distribuovaný real-time stream)
-        │
-        ▼
-     Logstash         (Parsing, normalizácia a enrichovanie dát)
-        │
-        ▼
-  Elasticsearch       (Indexovanie a rýchle vyhľadávanie v telemetrii)
-        │
-        ▼
-   [ Agentic Core ]   (LangGraph + Qwen / DeepSeek)
-```
+TBD
 
 ### Spustenie ingest pipeline
 
