@@ -68,6 +68,23 @@ curl http://127.0.0.1:9200/_data_stream/logs-app-default
 
 ---
 
+## 📝 Zápisnice zo stretnutí
+
+Zápisnice dokumentujú priebeh tímových stretnutí, prijaté
+rozhodnutia, konzultácie s vedúcim projektu a úlohy členov tímu.
+
+| Zápisnica | Dátum stretnutia | Hlavné zameranie stretnutia | Dokument |
+| :--- | :---: | :--- | :---: |
+| Zápisnica č. 1/2026 | 07.10.2026 | Úvodné stretnutie a organizácia projektu | [📄 PDF](docs/zapisnice/Zápisnica%20č.%201_2026.pdf) |
+| Zápisnica č. 2/2026 | 15.10.2026 | Existujúce riešenia a serverová infraštruktúra | [📄 PDF](docs/zapisnice/Zápisnica%20č.%202_2026.pdf) |
+| Zápisnica č. 3/2026 | 22.10.2026 | Stav infraštruktúry a koncept riešenia | [📄 PDF](docs/zapisnice/Zápisnica%20č.%203_2026.pdf) |
+| Zápisnica č. 4/2026 | 27.10.2026 | Abstrakt zadania a rozdelenie úloh | [📄 PDF](docs/zapisnice/Zápisnica%20č.%204_2026.pdf) |
+| Zápisnica č. 5/2026 | 29.10.2026 | Spracovanie logov a návrh agentického systému | [📄 PDF](docs/zapisnice/Zápisnica%20č.%205_2026.pdf) |
+| Zápisnica č. 6/2026 | 05.11.2026 | Architektúra systému a integrácia technológií | [📄 PDF](docs/zapisnice/Zápisnica%20č.%206_2026.pdf) |
+| Zápisnica č. 7/2026 | 12.11.2026 | Spracovanie logov a rozhodovacie mechanizmy agenta | [📄 PDF](docs/zapisnice/Zápisnica%20č.%207_2026.pdf) |
+
+---
+
 ## 👥 Spoznaj tím
 
 * **Damián Danko** (`I-API-CYBERSEC`)
