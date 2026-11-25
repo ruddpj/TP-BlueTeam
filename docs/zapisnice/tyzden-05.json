@@ -1,9 +1,18 @@
 {
   "tyzden": 5,
-  "datum": "4. 11. 2026",
-  "nazov": "",
-  "zapis_vypracoval": "",
-  "pritomni": "",
-  "priebeh_stretnutia": "",
-  "zadane_ulohy": []
+  "datum": "29. 10. 2026",
+  "nazov": "Návrh spracovania logov a agentického systému",
+  "zapis_vypracoval": "Marco Dzurilla",
+  "priebeh_stretnutia": "Tím prebral stav webovej stránky a zápisníc a návrh zberu, obohacovania a odosielania logov do Elasticsearch. Diskutoval o možných technológiách na prenos a spracovanie dát, ako Apache Kafka, Logstash a PostgreSQL, a o návrhu agentického systému vrátane LangGraph, prístupu Creator–Critic a výberu modelu pomocou routera.",
+  "pdf": "Zápisnica č. 5_2026.pdf",
+  "zadane_ulohy": [
+    {
+      "uloha": "Rozpracovať návrh architektúry a spracovania logov",
+      "zodpovedny": "Všetci"
+    },
+    {
+      "uloha": "Preskúmať možnosti použitých technológií a odôvodniť ich prínos",
+      "zodpovedny": "Všetci"
+    }
+  ]
 }

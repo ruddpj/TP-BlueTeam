@@ -58,38 +58,8 @@
 
 <section id="zapisnice" class="section">
   <h2>Zápisnica</h2>
-  <div class="section-body">
-    <!-- Obsah zápisníc je v zapisnice/tyzden-XX.json. Nový týždeň = skopíruj blok <details> a vyplň ho podľa JSON. -->
-
-    <!-- Týždeň 1 (zapisnice/tyzden-01.json) -->
-    <details class="minutes" id="tyzden-1" open>
-      <summary>
-        <span class="m-date">7. 10. 2026</span>
-        <span class="m-title">Úvodné stretnutie, organizácia projektu</span>
-        <span class="m-toggle" aria-hidden="true">↓</span>
-      </summary>
-      <div class="m-content">
-        <dl class="m-meta">
-          <div><dt>Stretnutie</dt><dd>7. 10. 2026</dd></div>
-          <div><dt>Zápis vypracoval</dt><dd>Adam Hoffmann</dd></div>
-          <div><dt>Prítomní</dt><dd>Všetci členovia tímu</dd></div>
-        </dl>
-        <div class="m-block">
-          <span class="m-label">Priebeh stretnutia</span>
-          <p>Na stretnutí boli prezentované úvodné informácie k projektu a organizačné záležitosti.</p>
-        </div>
-        <div class="m-block">
-          <span class="m-label">Zadané úlohy</span>
-          <ul class="m-tasks">
-            <li><span class="what">Pripraviť web stránku projektu</span><span class="who">Adam Hoffmann</span></li>
-            <li><span class="what">Založenie spoločného repozitára</span><span class="who">Rudolf Tisoň</span></li>
-            <li><span class="what">Rešerš tematiky projektu</span><span class="who">Všetci</span></li>
-            <li><span class="what">Vygenerovať SSH kľúč a poslať vedúcemu projektu</span><span class="who">Všetci</span></li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
+  <div class="section-body" id="minutes-list" aria-live="polite">
+    <!-- Zápisnice sa načítavajú z JSON súborov v priečinku zapisnice/. -->
   </div>
 </section>
 
@@ -134,5 +104,6 @@
 </footer>
 
 </div>
+<script src="minutes.js" defer></script>
 </body>
 </html>

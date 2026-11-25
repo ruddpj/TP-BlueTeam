@@ -1,9 +1,18 @@
 {
   "tyzden": 6,
-  "datum": "11. 11. 2026",
-  "nazov": "",
-  "zapis_vypracoval": "",
-  "pritomni": "",
-  "priebeh_stretnutia": "",
-  "zadane_ulohy": []
+  "datum": "5. 11. 2026",
+  "nazov": "Návrh architektúry agentického systému",
+  "zapis_vypracoval": "Marco Dzurilla",
+  "priebeh_stretnutia": "Tím diskutoval o rozdelení analýzy udalostí medzi modely Qwen a DeepSeek a o možnom riadení krokov pomocou LangGraph. Prebral využitie Elasticsearch alebo ChromaDB, zdroje údajov MITRE ATT&CK, OWASP, CVE a CWE, ako aj nástroje na prácu s modelmi, spoločný repozitár a prístup k serverovej infraštruktúre.",
+  "pdf": "Zápisnica č. 6_2026.pdf",
+  "zadane_ulohy": [
+    {
+      "uloha": "Rozpracovať návrh agentického systému a preskúmať možnosti Elasticsearch a dostupných nástrojov",
+      "zodpovedny": "Všetci"
+    },
+    {
+      "uloha": "Pripraviť spoločný repozitár a overiť prístupy k potrebnej infraštruktúre",
+      "zodpovedny": "Všetci"
+    }
+  ]
 }

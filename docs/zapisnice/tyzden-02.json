@@ -1,9 +1,18 @@
 {
   "tyzden": 2,
-  "datum": "14. 10. 2026",
-  "nazov": "",
-  "zapis_vypracoval": "",
-  "pritomni": "",
-  "priebeh_stretnutia": "",
-  "zadane_ulohy": []
+  "datum": "15. 10. 2026",
+  "nazov": "Diskusia k riešeniam projektu a prístupu na server",
+  "zapis_vypracoval": "Marco Dzurilla",
+  "priebeh_stretnutia": "Tím diskutoval o existujúcich riešeniach, možných technológiách a výbere databázy. Vedúci projektu potvrdil, že verejné SSH kľúče členov tímu eviduje a pripravuje pravidlá používania servera. Zároveň vyzval tím, aby pokračoval v príprave webovej stránky a zápisníc na kontrolu.",
+  "pdf": "Zápisnica č. 2_2026.pdf",
+  "zadane_ulohy": [
+    {
+      "uloha": "Preskúmať existujúce riešenia a pripraviť vlastné návrhy",
+      "zodpovedny": "Všetci"
+    },
+    {
+      "uloha": "Pokračovať v príprave webovej stránky a zápisníc a zaslať ich vedúcemu na kontrolu",
+      "zodpovedny": "Všetci"
+    }
+  ]
 }

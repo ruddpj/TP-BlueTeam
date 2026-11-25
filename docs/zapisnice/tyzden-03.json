@@ -1,9 +1,18 @@
 {
   "tyzden": 3,
-  "datum": "21. 10. 2026",
-  "nazov": "",
-  "zapis_vypracoval": "",
-  "pritomni": "",
-  "priebeh_stretnutia": "",
-  "zadane_ulohy": []
+  "datum": "22. 10. 2026",
+  "nazov": "Stav projektu a prvotný koncept riešenia",
+  "zapis_vypracoval": "Marco Dzurilla",
+  "priebeh_stretnutia": "Tím prebral stav webovej stránky a prihlasovania na server. Vedúci predstavil dostupné a plánované jazykové modely a odporučil preskúmať využitie Elasticsearch. Zároveň predstavil možný prístup založený na väčšom modeli, ktorý pripraví nástroje pre menší model, a požiadal tím o prvotný koncept riešenia v horizonte jedného až dvoch týždňov.",
+  "pdf": "Zápisnica č. 3_2026.pdf",
+  "zadane_ulohy": [
+    {
+      "uloha": "Pripraviť prvotný koncept riešenia tímového projektu",
+      "zodpovedny": "Všetci"
+    },
+    {
+      "uloha": "Preskúmať potrebnosť Elasticsearch a pokračovať v príprave pracovného prostredia",
+      "zodpovedny": "Všetci"
+    }
+  ]
 }

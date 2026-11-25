@@ -198,6 +198,7 @@ a:hover { color: var(--accent-hover); }
   text-transform: uppercase;
 }
 .m-block p { margin: 0; text-wrap: pretty; }
+.m-pdf { align-self: flex-start; }
 .m-tasks { list-style: none; margin: 0; padding: 0; }
 .m-tasks li {
   display: grid;

@@ -1,9 +1,18 @@
 {
   "tyzden": 7,
-  "datum": "18. 11. 2026",
-  "nazov": "",
-  "zapis_vypracoval": "",
-  "pritomni": "",
-  "priebeh_stretnutia": "",
-  "zadane_ulohy": []
+  "datum": "12. 11. 2026",
+  "nazov": "Spracovanie logov a návrh agentického systému",
+  "zapis_vypracoval": "Marco Dzurilla",
+  "priebeh_stretnutia": "Tím diskutoval o zbere a spracovaní logov vrátane Filebeat a Elastic Agent, o prenose dát cez Apache Kafka, Logstash alebo PostgreSQL a o návrhu agentického systému. Prebral framework LangGraph, prístup Creator–Critic, agentický cyklus, whitelist a výber jazykového modelu pomocou routera.",
+  "pdf": "Zápisnica č. 7_2026.pdf",
+  "zadane_ulohy": [
+    {
+      "uloha": "Rozpracovať návrh architektúry a spracovania logov",
+      "zodpovedny": "Všetci"
+    },
+    {
+      "uloha": "Preskúmať možnosti technológií a odôvodniť ich využitie v riešení",
+      "zodpovedny": "Všetci"
+    }
+  ]
 }

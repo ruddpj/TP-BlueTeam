@@ -1,9 +1,18 @@
 {
   "tyzden": 4,
-  "datum": "28. 10. 2026",
-  "nazov": "",
-  "zapis_vypracoval": "",
-  "pritomni": "",
-  "priebeh_stretnutia": "",
-  "zadane_ulohy": []
+  "datum": "27. 10. 2026",
+  "nazov": "Diskusia k abstraktu a rozdelenie krátkodobých úloh",
+  "zapis_vypracoval": "Marco Dzurilla",
+  "priebeh_stretnutia": "Členovia tímu diskutovali o zadaní projektu, základnej predstave o fungovaní systému a možnostiach jeho realizácie. Následne si rozdelili krátkodobé úlohy a dohodli sa na vzájomnej komunikácii o ich priebehu.",
+  "pdf": "Zápisnica č. 4_2026.pdf",
+  "zadane_ulohy": [
+    {
+      "uloha": "Pripraviť podklady a spracovať rozdelené krátkodobé úlohy k abstraktu",
+      "zodpovedny": "Všetci"
+    },
+    {
+      "uloha": "Priebežne informovať tím o stave riešenia úloh",
+      "zodpovedny": "Všetci"
+    }
+  ]
 }
