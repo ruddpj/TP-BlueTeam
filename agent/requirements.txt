@@ -1,0 +1,3 @@
+fastapi==0.115.8
+langgraph==0.2.76
+uvicorn[standard]==0.34.0

@@ -71,6 +71,43 @@ services:
     networks:
       - ingestion-net
 
+  agent:
+    build:
+      context: ./agent
+    environment:
+      ELASTICSEARCH_URL: ${ELASTICSEARCH_URL:-http://elasticsearch:9200}
+      ELASTICSEARCH_USERNAME: ${ELASTICSEARCH_USERNAME:-}
+      ELASTICSEARCH_PASSWORD: ${ELASTICSEARCH_PASSWORD:-}
+      ELASTICSEARCH_API_KEY: ${ELASTICSEARCH_API_KEY:-}
+      RISK_SCORE_THRESHOLD: ${RISK_SCORE_THRESHOLD:-70}
+      AGENT_WEBHOOK_TOKEN: ${AGENT_WEBHOOK_TOKEN:?Set AGENT_WEBHOOK_TOKEN in your environment}
+    ports:
+      - "${AGENT_PORT:-8000}:8000"
+    depends_on:
+      - elasticsearch
+    restart: unless-stopped
+    networks:
+      - ingestion-net
+
+  kibana-alert-setup:
+    image: python:3.12-alpine
+    command: ["python", "/app/setup_alerting.py"]
+    environment:
+      KIBANA_URL: ${KIBANA_URL:?Set KIBANA_URL to your existing Kibana URL}
+      KIBANA_USERNAME: ${KIBANA_USERNAME:-}
+      KIBANA_PASSWORD: ${KIBANA_PASSWORD:-}
+      KIBANA_API_KEY: ${KIBANA_API_KEY:-}
+      AGENT_WEBHOOK_URL: ${AGENT_WEBHOOK_URL:?Set AGENT_WEBHOOK_URL to an address reachable from the Kibana container}
+      AGENT_WEBHOOK_TOKEN: ${AGENT_WEBHOOK_TOKEN:?Set AGENT_WEBHOOK_TOKEN in your environment}
+      RISK_SCORE_THRESHOLD: ${RISK_SCORE_THRESHOLD:-70}
+    volumes:
+      - ./kibana/setup_alerting.py:/app/setup_alerting.py:ro,z
+    depends_on:
+      - agent
+    restart: on-failure
+    networks:
+      - ingestion-net
+
   logstash:
     image: docker.elastic.co/logstash/logstash:8.11.0
     environment:
