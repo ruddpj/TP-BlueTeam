@@ -71,6 +71,19 @@ services:
     networks:
       - ingestion-net
 
+  elasticsearch-template-setup:
+    image: python:3.12-alpine
+    command: ["python", "/app/setup_es_template.py"]
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    volumes:
+      - ./scripts/setup_es_template.py:/app/setup_es_template.py:ro,z
+    depends_on:
+      - elasticsearch
+    restart: on-failure
+    networks:
+      - ingestion-net
+
   agent:
     build:
       context: ./agent
@@ -80,11 +93,13 @@ services:
       ELASTICSEARCH_PASSWORD: ${ELASTICSEARCH_PASSWORD:-}
       ELASTICSEARCH_API_KEY: ${ELASTICSEARCH_API_KEY:-}
       RISK_SCORE_THRESHOLD: ${RISK_SCORE_THRESHOLD:-70}
+      ALERT_LOOKBACK_MINUTES: ${ALERT_LOOKBACK_MINUTES:-60}
       AGENT_WEBHOOK_TOKEN: ${AGENT_WEBHOOK_TOKEN:?Set AGENT_WEBHOOK_TOKEN in your environment}
     ports:
       - "${AGENT_PORT:-8000}:8000"
     depends_on:
-      - elasticsearch
+      elasticsearch-template-setup:
+        condition: service_completed_successfully
     restart: unless-stopped
     networks:
       - ingestion-net
@@ -100,6 +115,7 @@ services:
       AGENT_WEBHOOK_URL: ${AGENT_WEBHOOK_URL:?Set AGENT_WEBHOOK_URL to an address reachable from the Kibana container}
       AGENT_WEBHOOK_TOKEN: ${AGENT_WEBHOOK_TOKEN:?Set AGENT_WEBHOOK_TOKEN in your environment}
       RISK_SCORE_THRESHOLD: ${RISK_SCORE_THRESHOLD:-70}
+      ALERT_LOOKBACK_MINUTES: ${ALERT_LOOKBACK_MINUTES:-60}
     volumes:
       - ./kibana/setup_alerting.py:/app/setup_alerting.py:ro,z
     depends_on:
@@ -117,8 +133,13 @@ services:
       - ./scripts/risk_scorer.rb:/usr/share/logstash/scripts/risk_scorer.rb:ro,z
       - ./threat-intel:/usr/share/logstash/config/threat-intel:ro,z
     depends_on:
-      - kafka
-      - elasticsearch
-      - threat-intel-updater
+      kafka:
+        condition: service_started
+      elasticsearch:
+        condition: service_started
+      threat-intel-updater:
+        condition: service_started
+      elasticsearch-template-setup:
+        condition: service_completed_successfully
     networks:
       - ingestion-net

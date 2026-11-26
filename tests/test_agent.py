@@ -31,10 +31,12 @@ class AgentTests(unittest.TestCase):
             "source": "kibana",
             "rule_id": "rule-1",
             "rule_name": "High risk",
+            "alert_id": "alert-1",
             "triggered_at": "2026-11-26T10:00:00Z",
         }
         trigger = main.AlertTrigger.model_validate(payload)
         self.assertEqual("rule-1", trigger.rule_id)
+        self.assertEqual("alert-1", trigger.alert_id)
 
         with self.assertRaises(ValidationError):
             main.AlertTrigger.model_validate({**payload, "unexpected": True})
@@ -50,6 +52,7 @@ class AgentTests(unittest.TestCase):
         with (
             patch.dict("os.environ", {"AGENT_WEBHOOK_TOKEN": "test-token"}),
             patch.object(main.agent_graph, "invoke", return_value={"events": {"values": []}}) as invoke,
+            patch.object(main, "write_audit_record") as audit,
         ):
             response = main.handle_kibana_alert(
                 trigger, tasks, "Bearer test-token"
@@ -62,12 +65,14 @@ class AgentTests(unittest.TestCase):
 
             asyncio.run(tasks())
             invoke.assert_called_once()
+            audit.assert_called_once()
 
     def test_http_endpoint_returns_202(self):
         payload = {
             "source": "kibana",
             "rule_id": "rule-1",
             "rule_name": "High risk",
+            "alert_id": "alert-1",
             "triggered_at": "2026-11-26T10:00:00Z",
         }
         with (
@@ -75,6 +80,7 @@ class AgentTests(unittest.TestCase):
             patch.object(
                 main.agent_graph, "invoke", return_value={"events": {"values": []}}
             ),
+            patch.object(main, "write_audit_record"),
         ):
             response = TestClient(main.app).post(
                 "/webhook/kibana",
@@ -84,6 +90,29 @@ class AgentTests(unittest.TestCase):
 
         self.assertEqual(202, response.status_code)
         self.assertEqual("accepted", response.json()["status"])
+
+    def test_audit_record_is_indexed_with_alert_id(self):
+        captured = {}
+
+        def fake_urlopen(request, timeout):
+            captured["url"] = request.full_url
+            captured["document"] = json.loads(request.data)
+            return FakeResponse({})
+
+        trigger = {
+            "source": "kibana",
+            "rule_id": "rule-1",
+            "rule_name": "High risk",
+            "alert_id": "alert-1",
+            "triggered_at": "2026-11-26T10:00:00+00:00",
+        }
+        with patch.object(main, "urlopen", fake_urlopen):
+            main.write_audit_record("trigger-1", trigger, 2)
+
+        self.assertTrue(captured["url"].endswith("/agent-audit-logs/_doc"))
+        self.assertEqual("alert-1", captured["document"]["alert_id"])
+        self.assertEqual("trigger-1", captured["document"]["trigger_id"])
+        self.assertEqual(2, captured["document"]["matched_events"])
 
     def test_handler_rejects_bad_token(self):
         trigger = main.AlertTrigger(rule_id="rule-1", rule_name="High risk")
