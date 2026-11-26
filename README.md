@@ -19,42 +19,11 @@ Namiesto pasívneho reportovania udalostí agent generuje hypotézy o prebiehaj�
 
 TBD
 
-### Spustenie ingest pipeline
-
-Elasticsearch je dostupný iba lokálne na `127.0.0.1:9200` a v tomto testovacom nastavení
-nemá zapnuté prihlasovanie. Spustite služby príkazom:
-
-```sh
-podman-compose -f podman-compose.yml up -d
-```
-
-Logstash zapisuje spracované udalosti do dátového streamu `logs-app-default`.
-Jeho stav môžete overiť príkazom:
-
-```sh
-curl http://127.0.0.1:9200/_data_stream/logs-app-default
-```
-
-Údaje Elasticsearch sa zachovajú v pomenovanom volume `elasticsearch-data`.
-
 ---
 
 ## 🛠️ Použité technológie
 
-### Ingestion & Data Pipeline
-* **Filebeat** – ľahký agent na zber a streamovanie logov z cieľových prostredí.
-* **Apache Kafka** – správca správ (event-streaming platforma) pre bezpečné a škálovateľné spracovanie toku logov v reálnom čase.
-* **Logstash** – spracovanie, filtrovanie a štruktúrovanie nespracovaných dát.
-* **Elasticsearch** – centrálne úložisko pre spracované bezpečnostné udalosti a vy vyhľadávanie v telemetrii.
-
-### Agentic Intelligence & Orchestration
-* **LangGraph** – rámec na vybudovanie cyklického, stavového agentického grafu (rozhodovací proces, tvorba hypotéz, hodnotiaca slučka).
-* **Qwen / DeepSeek** – lokálne/open-source LLM modely na analýzu logov, uvažovanie nad technikami útočníka a návrh reakcií.
-* **MITRE ATT&CK** – znalostná báza na mapovanie a klasifikáciu taktických krokov útočníka.
-
-### Infraštruktúra & Prostredie
-* **Python 3.x** – primárny jazyk pre vývoj agenta a integráciu.
-* **Podman / Podman Compose** – kontajnerizácia a izolácia testovacieho prostredia (Sandbox).
+TBD
 
 ---
 
